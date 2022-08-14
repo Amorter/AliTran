@@ -6,16 +6,83 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>843</width>
+    <height>533</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="tranButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>翻译</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="inputEdit"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>843</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <widget class="QMenu" name="language">
+     <property name="title">
+      <string>语言</string>
+     </property>
+     <addaction name="Lzh_cn"/>
+     <addaction name="Len_us"/>
+    </widget>
+    <addaction name="apioption"/>
+    <addaction name="language"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <action name="apioption">
+   <property name="text">
+    <string>api设置</string>
+   </property>
+  </action>
+  <action name="Lzh_cn">
+   <property name="text">
+    <string>zh-cn</string>
+   </property>
+  </action>
+  <action name="Len_us">
+   <property name="text">
+    <string>en-us</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
