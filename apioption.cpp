@@ -12,3 +12,15 @@ apioption::~apioption()
 {
     delete ui;
 }
+
+void apioption::on_buttonBox_accepted()
+{
+
+}
+
+
+void apioption::on_buttonBox_rejected()
+{
+
+}
+

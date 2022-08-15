@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     apioption = new class apioption();
 
+
 }
 
 MainWindow::~MainWindow()
@@ -19,5 +20,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_apioption_triggered()
 {
     apioption->show();
+
 }
 

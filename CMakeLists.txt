@@ -17,26 +17,34 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 set(TS_FILES MyProject1_zh_CN.ts)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        apioption.cpp
-        apioption.h
-        apioption.ui
-        ${TS_FILES}
+    main.cpp
+    mainwindow.cpp
+    mainwindow.h
+    mainwindow.ui
+    apioption.cpp
+    apioption.h
+    apioption.ui
+    ReadWriteFile.h
+    ReadWriteFile.cpp
+    aliapi.cpp
+    aliapi.h
+    ${TS_FILES}
 )
 
 
 
-    qt_add_executable(MyProject1
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+qt_add_executable(MyProject1
+    MANUAL_FINALIZATION
+    ${PROJECT_SOURCES}
+)
+qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 
-
+target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/ssleay32.lib")
+target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/libeay32.lib")
+target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/libcurl.lib")
+target_include_directories(MyProject1 PRIVATE "C:/Program Files (x86)/alibabacloud-oss-cpp-sdk/include")
 target_link_libraries(MyProject1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(MyProject1 PRIVATE "C:/Program Files (x86)/alibabacloud-oss-cpp-sdk/lib/alibabacloud-oss-cpp-sdk-static.lib")
 
 set_target_properties(MyProject1 PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
