@@ -1,11 +1,13 @@
 #include "readwritefile.h"
 #include <QFile>
 #include <QTextStream>
+
+//读写文件工具类
 ReadWriteFile::ReadWriteFile()
 {
 }
 
-//写入文件
+//读取文件
 QStringList ReadWriteFile::ReadCach(int line,QString name){
     QStringList out;
     QFile input = QFile(name);
@@ -16,7 +18,7 @@ QStringList ReadWriteFile::ReadCach(int line,QString name){
     return out;
 }
 
-//读取文件
+//写入文件
 void ReadWriteFile::WriteCach(int line,QString *text,QString name){
     QFile input = QFile(name);
     QTextStream inputstream = QTextStream(&input);
@@ -26,6 +28,7 @@ void ReadWriteFile::WriteCach(int line,QString *text,QString name){
 }
 
 //判断文件是否存在
-bool isexist(QString name){
-    QFile input = QFile(name)
+bool ReadWriteFile::isexist(QString name){
+    QFile input = QFile(name);
+    return input.exists();
 }

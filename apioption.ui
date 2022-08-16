@@ -30,7 +30,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3"/>
+      <widget class="QLineEdit" name="AcessKeyIDEdit"/>
      </item>
     </layout>
    </item>
@@ -44,7 +44,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="AcessKeySecretEdit"/>
      </item>
     </layout>
    </item>
@@ -58,7 +58,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="EndpointEdit"/>
      </item>
     </layout>
    </item>
@@ -72,7 +72,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_4"/>
+      <widget class="QLineEdit" name="BucketNameEdit"/>
      </item>
     </layout>
    </item>

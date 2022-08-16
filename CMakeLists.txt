@@ -28,6 +28,8 @@ set(PROJECT_SOURCES
     ReadWriteFile.cpp
     aliapi.cpp
     aliapi.h
+    global.cpp
+    global.h
     ${TS_FILES}
 )
 

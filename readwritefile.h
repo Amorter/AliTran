@@ -8,9 +8,9 @@ class ReadWriteFile
 {
 public:
     ReadWriteFile();
-    QStringList ReadCach(int line,QString name);
-    void WriteCach(int line,QString *text,QString name);
-    bool isexist(QString name);
+    static QStringList ReadCach(int line,QString name);
+    static void WriteCach(int line,QString *text,QString name);
+    static bool isexist(QString name);
 };
 
 #endif // READWRITEFILE_H

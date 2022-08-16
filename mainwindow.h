@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "aliapi.h"
+#include "readwritefile.h"
 #include "apioption.h"
 #include <QMainWindow>
 
