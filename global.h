@@ -3,4 +3,5 @@
 #include <QString>
 #include <QObject>
 extern QStringList apioptionlist;
+extern QString outputfileurl;
 #endif // GLOBAL_H

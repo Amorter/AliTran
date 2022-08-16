@@ -2,10 +2,11 @@
 #include "alibabacloud/oss/OssClient.h"
 #include "alibabacloud/alimt/AlimtClient.h"
 #include "alibabacloud/core/AlibabaCloud.h"
-#include "readwritefile.h"
+#include "global.h"
+#include <windows.h>
 
 QStringList option;
-
+QString version;
 
 //阿里云api
 Aliapi::Aliapi(QStringList inputoption)
@@ -54,6 +55,7 @@ bool Aliapi::pushfile(QString inputfile){
         ShutdownSdk();
         return false;
     }
+    version = QString::fromStdString(outcome.result().VersionId());
 
     /* 释放网络等资源。*/
     ShutdownSdk();
@@ -61,51 +63,7 @@ bool Aliapi::pushfile(QString inputfile){
 }
 
 
-//下载文件
-bool Aliapi::downfile(QString downfile){
-    using namespace AlibabaCloud::OSS;
-    /* 初始化OSS账号信息。*/
-    /* 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。*/
-    std::string AccessKeyId = option.at(0).toStdString();
-    std::string AccessKeySecret = option.at(1).toStdString();
-    /* yourEndpoint填写Bucket所在地域对应的Endpoint。以华东1（杭州）为例，Endpoint填写为https://oss-cn-hangzhou.aliyuncs.com。*/
-    std::string Endpoint = option.at(2).toStdString();
-    /* 填写Bucket名称，例如examplebucket。*/
-    std::string BucketName = option.at(3).toStdString();
-    /* 填写Object完整路径，完整路径中不能包含Bucket名称，例如exampledir/exampleobject.txt。*/
-    std::string ObjectName = "cach/" + downfile.toStdString();
-    //保存到本地的文件名
-    std::string FileNametoSave = downfile.toStdString();
 
-    /* 初始化网络等资源。*/
-    InitializeSdk();
-
-    ClientConfiguration conf;
-    OssClient client(Endpoint, AccessKeyId, AccessKeySecret, conf);
-
-    /* 下载Object到本地文件。*/
-    GetObjectRequest request(BucketName, ObjectName);
-    request.setResponseStreamFactory([=]() {return std::make_shared<std::fstream>(FileNametoSave, std::ios_base::out | std::ios_base::in | std::ios_base::trunc| std::ios_base::binary); });
-
-    auto outcome = client.GetObject(request);
-
-    if (outcome.isSuccess()) {
-        std::cout << "GetObjectToFile success" << outcome.result().Metadata().ContentLength() << std::endl;
-    }
-    else {
-        /* 异常处理。*/
-        std::cout << "GetObjectToFile fail" <<
-                     ",code:" << outcome.error().Code() <<
-                     ",message:" << outcome.error().Message() <<
-                     ",requestId:" << outcome.error().RequestId() << std::endl;
-        ShutdownSdk();
-        return false;
-    }
-
-    /* 释放网络等资源。*/
-    ShutdownSdk();
-    return true;
-}
 
 //删除文件
 bool Aliapi::delfile(QString delfile){
@@ -127,7 +85,7 @@ bool Aliapi::delfile(QString delfile){
     ClientConfiguration conf;
     OssClient client(Endpoint, AccessKeyId, AccessKeySecret, conf);
 
-    DeleteObjectRequest request(BucketName, ObjectName);
+    DeleteObjectRequest request(BucketName, ObjectName , version.toStdString());
 
     /* 删除文件。*/
     auto outcome = client.DeleteObject(request);
@@ -150,8 +108,6 @@ bool Aliapi::delfile(QString delfile){
 //翻译任务
 bool Aliapi::tran()
 {
-    std::cout << "Hello World" << std::endl;
-
     using namespace AlibabaCloud;
     using namespace AlibabaCloud::Alimt;
     AlibabaCloud::InitializeSdk();
@@ -185,13 +141,22 @@ bool Aliapi::tran()
     AlimtClient client1( credential, configuration );
     Model::GetDocTranslateTaskRequest request1;
     request1.setTaskId(outcome.result().getTaskId());
-    auto outcome1 = client1.getDocTranslateTask( request1 );
-    if( !outcome1.isSuccess() )
-    {
-        std::cout << outcome.error().errorMessage() << std::endl;
-        AlibabaCloud::ShutdownSdk();
+
+    //等待翻译完成,最多等待5s
+    for( int var=0 ; var<10 ; var++ ){
+        auto outcome1 = client1.getDocTranslateTask( request1 );
+        if( !outcome1.isSuccess() )
+        {
+            std::cout << outcome.error().errorMessage() << std::endl;
+            AlibabaCloud::ShutdownSdk();
+        }
+        Sleep(500);
+        //翻译结果下载url保存到全局变量
+        if( outcome1.result().getStatus()== "translated" ){
+            outputfileurl = QString::fromStdString(outcome1.result().getTranslateFileUrl());
+            break;
+        }
     }
-    std::cout << outcome1.result().getStatus() << std::endl;
 
     AlibabaCloud::ShutdownSdk();
     return true;

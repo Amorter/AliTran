@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "aliapi.h"
-#include "readwritefile.h"
+
 #include "apioption.h"
 #include <QMainWindow>
 
@@ -19,7 +18,6 @@ public:
     apioption *apioption;
 private slots:
     void on_apioption_triggered();
-
     void on_tranButton_clicked();
 
 private:

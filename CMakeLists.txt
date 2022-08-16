@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
     aliapi.h
     global.cpp
     global.h
+    curl.h
+    curl.cpp
     ${TS_FILES}
 )
 
@@ -44,6 +46,7 @@ qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/ssleay32.lib")
 target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/libeay32.lib")
 target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/libcurl.lib")
+target_include_directories(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/include")
 target_include_directories(MyProject1 PRIVATE "C:/Program Files (x86)/alibabacloud-oss-cpp-sdk/include")
 target_include_directories(MyProject1 PRIVATE "C:/Program Files/alibabacloud-sdk/include")
 target_link_libraries(MyProject1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

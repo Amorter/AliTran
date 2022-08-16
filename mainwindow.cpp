@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "global.h"
+#include "aliapi.h"
+#include "readwritefile.h"
+#include "curl.h"
+#include <windows.h>
 
 //主窗口构造函数
 MainWindow::MainWindow(QWidget *parent)
@@ -53,6 +57,15 @@ void MainWindow::on_tranButton_clicked()
         //执行翻译任务
         ui->outinfo->append("执行翻译任务");
         aliapi->tran();
+        ui->outinfo->append("获取返回结果url成功");
+        ui->outinfo->append("尝试下载文件到本地");
+        curl outcurl = curl(outputfileurl);
+        if(outcurl.curldown() == 0){
+            ui->outinfo->append("下载成功,翻译结果在程序目录下output.txt文件中");
+        }
+        ui->outinfo->append("删除OSS缓存中");
+        aliapi->delfile("input.txt");
+        ui->outinfo->append("删除OSS缓存完成");
     }
 }
 
