@@ -142,8 +142,8 @@ bool Aliapi::tran()
     Model::GetDocTranslateTaskRequest request1;
     request1.setTaskId(outcome.result().getTaskId());
 
-    //等待翻译完成,最多等待5s
-    for( int var=0 ; var<10 ; var++ ){
+    //等待翻译完成,最多等待50s
+    for( int var=0 ; var<100 ; var++ ){
         auto outcome1 = client1.getDocTranslateTask( request1 );
         if( !outcome1.isSuccess() )
         {
