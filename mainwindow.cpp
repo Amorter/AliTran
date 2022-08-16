@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     else{
         apioptionlist << "" << "" << "" << "";
     }
+
+    //创建apioption窗口对象
     apioption = new class apioption();
 }
 
@@ -23,12 +25,34 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    ReadWriteFile::WriteCach(4,apioptionlist.join("\n"),"apioption.txt");
+    ReadWriteFile::WriteCach(apioptionlist.join("\n"),"apioption.txt");
 }
 
 //api设置按钮点击事件
 void MainWindow::on_apioption_triggered()
 {
     apioption->show();
+}
+
+//翻译按钮点击事件
+void MainWindow::on_tranButton_clicked()
+{
+    ui->outinfo->append("启动翻译任务……");
+    //将文本框内容保存到目录
+    ui->outinfo->append("将输入写入本地");
+    ReadWriteFile::WriteCach(ui->inputEdit->toPlainText(),"input.txt");
+    ui->outinfo->append("写入本地文件成功");
+    //创建Aliapi对象
+    ui->outinfo->append("初始化阿里云api接口");
+    Aliapi *aliapi = new Aliapi(apioptionlist);
+    ui->outinfo->append("成功");
+    //上传文件到阿里云OSS
+    ui->outinfo->append("上传文件至阿里云OSS");
+    if(aliapi->pushfile("input.txt")){
+        ui->outinfo->append("上传成功");
+        //执行翻译任务
+        ui->outinfo->append("执行翻译任务");
+        aliapi->tran();
+    }
 }
 

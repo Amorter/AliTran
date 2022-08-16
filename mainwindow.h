@@ -20,6 +20,8 @@ public:
 private slots:
     void on_apioption_triggered();
 
+    void on_tranButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

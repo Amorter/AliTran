@@ -45,7 +45,10 @@ target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-
 target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/libeay32.lib")
 target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/libcurl.lib")
 target_include_directories(MyProject1 PRIVATE "C:/Program Files (x86)/alibabacloud-oss-cpp-sdk/include")
+target_include_directories(MyProject1 PRIVATE "C:/Program Files/alibabacloud-sdk/include")
 target_link_libraries(MyProject1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(MyProject1 PRIVATE "C:/Program Files/alibabacloud-sdk/lib/alibabacloud-sdk-core.lib")
+target_link_libraries(MyProject1 PRIVATE "C:/Program Files/alibabacloud-sdk/lib/alibabacloud-sdk-alimt.lib")
 target_link_libraries(MyProject1 PRIVATE "C:/Program Files (x86)/alibabacloud-oss-cpp-sdk/lib/alibabacloud-oss-cpp-sdk-static.lib")
 
 set_target_properties(MyProject1 PROPERTIES

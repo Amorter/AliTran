@@ -1,4 +1,8 @@
 #include "aliapi.h"
+#include "alibabacloud/oss/OssClient.h"
+#include "alibabacloud/alimt/AlimtClient.h"
+#include "alibabacloud/core/AlibabaCloud.h"
+#include "readwritefile.h"
 
 QStringList option;
 
@@ -8,10 +12,12 @@ Aliapi::Aliapi(QStringList inputoption)
 {
     option = inputoption;
 }
-using namespace AlibabaCloud::OSS;
+
+
 
 //上传文件
-int pushfile(QString inputfile){
+bool Aliapi::pushfile(QString inputfile){
+    using namespace AlibabaCloud::OSS;
 
     /* 初始化OSS账号信息。*/
     /* 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。*/
@@ -46,17 +52,18 @@ int pushfile(QString inputfile){
                      ",message:" << outcome.error().Message() <<
                      ",requestId:" << outcome.error().RequestId() << std::endl;
         ShutdownSdk();
-        return -1;
+        return false;
     }
 
     /* 释放网络等资源。*/
     ShutdownSdk();
-    return 0;
+    return true;
 }
 
 
 //下载文件
-int downfile(QString downfile){
+bool Aliapi::downfile(QString downfile){
+    using namespace AlibabaCloud::OSS;
     /* 初始化OSS账号信息。*/
     /* 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。*/
     std::string AccessKeyId = option.at(0).toStdString();
@@ -92,16 +99,17 @@ int downfile(QString downfile){
                      ",message:" << outcome.error().Message() <<
                      ",requestId:" << outcome.error().RequestId() << std::endl;
         ShutdownSdk();
-        return -1;
+        return false;
     }
 
     /* 释放网络等资源。*/
     ShutdownSdk();
-    return 0;
+    return true;
 }
 
 //删除文件
-int delfile(QString delfile){
+bool Aliapi::delfile(QString delfile){
+    using namespace AlibabaCloud::OSS;
     /* 初始化OSS账号信息。*/
     /* 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。*/
     std::string AccessKeyId = option.at(0).toStdString();
@@ -131,10 +139,62 @@ int delfile(QString delfile){
                      ",message:" << outcome.error().Message() <<
                      ",requestId:" << outcome.error().RequestId() << std::endl;
         ShutdownSdk();
-        return -1;
+        return false;
     }
 
     /* 释放网络等资源。*/
     ShutdownSdk();
-    return 0;
+    return true;
 }
+
+//翻译任务
+bool Aliapi::tran()
+{
+    std::cout << "Hello World" << std::endl;
+
+    using namespace AlibabaCloud;
+    using namespace AlibabaCloud::Alimt;
+    AlibabaCloud::InitializeSdk();
+    AlibabaCloud::ClientConfiguration configuration( "cn-hangzhou" );
+    AlibabaCloud::Credentials credential( option.at(0).toStdString() , option.at(1).toStdString() );
+    /* use STS Token
+       credential.setSessionToken( "<your-sts-token>" );
+       */
+
+    //文档翻译任务
+    AlimtClient client( credential, configuration );
+
+    Model::CreateDocTranslateTaskRequest request;
+    request.setTargetLanguage("zh");
+    request.setSourceLanguage("en");
+    request.setFileUrl("https://ksvip1.oss-cn-beijing.aliyuncs.com/cach/input.txt");
+
+    auto outcome = client.createDocTranslateTask( request );
+    if ( !outcome.isSuccess() )
+    {
+        std::cout << outcome.error().errorMessage() << std::endl;
+        AlibabaCloud::ShutdownSdk();
+        return false;
+    }
+
+    AlibabaCloud::ShutdownSdk();
+
+
+    AlibabaCloud::InitializeSdk();
+    //获取文档翻译任务结果下载url
+    AlimtClient client1( credential, configuration );
+    Model::GetDocTranslateTaskRequest request1;
+    request1.setTaskId(outcome.result().getTaskId());
+    auto outcome1 = client1.getDocTranslateTask( request1 );
+    if( !outcome1.isSuccess() )
+    {
+        std::cout << outcome.error().errorMessage() << std::endl;
+        AlibabaCloud::ShutdownSdk();
+    }
+    std::cout << outcome1.result().getStatus() << std::endl;
+
+    AlibabaCloud::ShutdownSdk();
+    return true;
+}
+
+
