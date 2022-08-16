@@ -26,7 +26,11 @@ apioption::~apioption()
 //save按钮点击事件
 void apioption::on_buttonBox_accepted()
 {
-
+    //从文本框获取内容保存到内存中的apioption对象
+    apioptionlist.replace(0,ui->AcessKeyIDEdit->text());
+    apioptionlist.replace(1,ui->AcessKeySecretEdit->text());
+    apioptionlist.replace(2,ui->EndpointEdit->text());
+    apioptionlist.replace(3,ui->BucketNameEdit->text());
 }
 
 //cancel按钮点击事件

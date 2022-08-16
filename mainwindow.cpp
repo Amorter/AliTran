@@ -19,16 +19,16 @@ MainWindow::MainWindow(QWidget *parent)
     apioption = new class apioption();
 }
 
+//主窗口关闭事件
 MainWindow::~MainWindow()
 {
     delete ui;
+    ReadWriteFile::WriteCach(4,apioptionlist.join("\n"),"apioption.txt");
 }
 
 //api设置按钮点击事件
 void MainWindow::on_apioption_triggered()
 {
-
     apioption->show();
-
 }
 

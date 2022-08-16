@@ -19,11 +19,11 @@ QStringList ReadWriteFile::ReadCach(int line,QString name){
 }
 
 //写入文件
-void ReadWriteFile::WriteCach(int line,QString *text,QString name){
+void ReadWriteFile::WriteCach(int line,QString text,QString name){
     QFile input = QFile(name);
     QTextStream inputstream = QTextStream(&input);
     input.open(QIODevice::WriteOnly | QIODevice::Truncate);
-    inputstream << *text;
+    inputstream << text;
     input.close();
 }
 
