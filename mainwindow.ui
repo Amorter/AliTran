@@ -11,7 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Ali Traner</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -32,7 +35,7 @@
          </size>
         </property>
         <property name="text">
-         <string>翻译</string>
+         <string>Tran</string>
         </property>
        </widget>
       </item>
@@ -70,12 +73,15 @@
     </rect>
    </property>
    <widget class="QMenu" name="menu">
+    <property name="tearOffEnabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
-     <string>菜单</string>
+     <string>menu</string>
     </property>
     <widget class="QMenu" name="language">
      <property name="title">
-      <string>语言</string>
+      <string>language</string>
      </property>
      <addaction name="Lzh_cn"/>
      <addaction name="Len_us"/>
@@ -87,7 +93,7 @@
   </widget>
   <action name="apioption">
    <property name="text">
-    <string>api设置</string>
+    <string>api option</string>
    </property>
   </action>
   <action name="Lzh_cn">

@@ -14,25 +14,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 
-set(TS_FILES MyProject1_zh_CN.ts)
-
+file(GLOB SRC_FILES "./*.cpp")
+file(GLOB HEAD_FILES "./*.h")
+file(GLOB TS_FILES "./*.ts")
+file(GLOB UI_FILES "./*.ui")
 set(PROJECT_SOURCES
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-    apioption.cpp
-    apioption.h
-    apioption.ui
-    ReadWriteFile.h
-    ReadWriteFile.cpp
-    aliapi.cpp
-    aliapi.h
-    global.cpp
-    global.h
-    curl.h
-    curl.cpp
+    ${SRC_FILES}
+    ${HEAD_FILES}
     ${TS_FILES}
+    ${UI_FILES}
+    resources.qrc
+    README.md
 )
 
 
