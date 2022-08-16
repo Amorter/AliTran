@@ -33,7 +33,10 @@ qt_add_executable(MyProject1
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
-qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+
+qt_add_translations(MyProject1 TS_FILES zh.ts)
+
+
 
 target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/ssleay32.lib")
 target_link_libraries(MyProject1 PRIVATE "C:/Users/11452/Desktop/aliyun-oss-cpp-sdk/third_party/lib/x64/libeay32.lib")

@@ -20,6 +20,8 @@ private slots:
     void on_apioption_triggered();
     void on_tranButton_clicked();
 
+    void on_Lzh_cn_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

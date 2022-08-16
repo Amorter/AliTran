@@ -74,3 +74,9 @@ void MainWindow::on_tranButton_clicked()
 
 }
 
+//切换为中文
+void MainWindow::on_Lzh_cn_triggered()
+{
+
+}
+
