@@ -23,7 +23,7 @@ set(PROJECT_SOURCES
     ${HEAD_FILES}
     ${TS_FILES}
     ${UI_FILES}
-    resources.qrc
+    app_win32.rc
     README.md
 )
 
