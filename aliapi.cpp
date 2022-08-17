@@ -123,8 +123,7 @@ bool Aliapi::tran()
     Model::CreateDocTranslateTaskRequest request;
     request.setTargetLanguage("zh");
     request.setSourceLanguage("en");
-    request.setFileUrl("https://ksvip1.oss-cn-beijing.aliyuncs.com/cach/input.txt");
-
+    request.setFileUrl("https://" + option.at(3).toStdString() + "." + option.at(2).toStdString() + "/cach/input.txt");
     auto outcome = client.createDocTranslateTask( request );
     if ( !outcome.isSuccess() )
     {
