@@ -29,7 +29,7 @@
 #include <curl/curl.h>
 #include <iostream>
 
-
+//第三方下载支持
 QString thisgeturl;
 curl::curl(QString geturl)
 {

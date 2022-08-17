@@ -5,12 +5,14 @@
 #include "readwritefile.h"
 #include "curl.h"
 #include <QtConcurrent/QtConcurrent>
+#include <QMessagebox>
 
 //主窗口构造函数
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
     //如果存在apioption,读取到内存
     if(ReadWriteFile::isexist("apioption.txt")){
@@ -77,6 +79,34 @@ void MainWindow::on_tranButton_clicked()
 //切换为中文
 void MainWindow::on_Lzh_cn_triggered()
 {
+    int ret = QMessageBox::warning(this, tr("prompt"),  tr("The language will be switched on the next startup"),
+                                       QMessageBox::Ok | QMessageBox::Cancel,  QMessageBox::Ok);
+    switch(ret)
+        {
+            case QMessageBox::Ok:
+                //此处填入操作，例如msgBox.setText("you choose Save button!");
+                ReadWriteFile::WriteCach("zh","language.txt");
+                break;
+            case QMessageBox::Cancel:
+                //此处填入操作
+                break;
+        }
+}
 
+//切换为英语
+void MainWindow::on_Len_us_triggered()
+{
+    int ret = QMessageBox::warning(this, tr("prompt"),  tr("The language will be switched on the next startup"),
+                                       QMessageBox::Ok | QMessageBox::Cancel,  QMessageBox::Ok);
+    switch(ret)
+        {
+            case QMessageBox::Ok:
+                //此处填入操作，例如msgBox.setText("you choose Save button!");
+                ReadWriteFile::WriteCach("en","language.txt");
+                break;
+            case QMessageBox::Cancel:
+                //此处填入操作
+                break;
+        }
 }
 

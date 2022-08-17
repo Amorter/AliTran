@@ -22,6 +22,8 @@ private slots:
 
     void on_Lzh_cn_triggered();
 
+    void on_Len_us_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
