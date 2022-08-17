@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "apioption.h"
+#include "tranoption.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -15,7 +16,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    apioption *apioption;
 private slots:
     void on_apioption_triggered();
     void on_tranButton_clicked();
@@ -28,5 +28,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    apioption *thisapioption;
+    tranoption *thistranoption;
 };
 #endif // MAINWINDOW_H

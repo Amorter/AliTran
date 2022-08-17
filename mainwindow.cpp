@@ -5,7 +5,7 @@
 #include "readwritefile.h"
 #include "curl.h"
 #include <QtConcurrent/QtConcurrent>
-#include <QMessagebox>
+#include <QMessageBox>
 
 //主窗口构造函数
 MainWindow::MainWindow(QWidget *parent)
@@ -14,30 +14,33 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     ui->setupUi(this);
-    //如果存option,读取到内存
-    if(ReadWriteFile::isexist("apioption.txt")){
-        optionlist = ReadWriteFile::ReadCach(4,"apioption.txt");
+    //如果存在option,读取到内存
+    if(ReadWriteFile::isexist("option.txt")){
+        optionlist = ReadWriteFile::ReadCach(7,"option.txt");
     }
     //不存在需要初始化apioptionlist对象，不然会溢出崩溃
     else{
-        optionlist << "" << "" << "" << "" ;
+        optionlist = ReadWriteFile::InitializeOption(optionlist);
     }
 
     //创建apioption窗口对象
-    apioption = new class apioption();
+    thisapioption = new apioption();
+    //创建tranoption窗口对象
+    thistranoption= new tranoption();
+
 }
 
 //主窗口关闭事件
 MainWindow::~MainWindow()
 {
     delete ui;
-    ReadWriteFile::WriteCach(optionlist.join("\n"),"apioption.txt");
+    ReadWriteFile::WriteCach(optionlist.join("\n"),"option.txt");
 }
 
 //api设置按钮点击事件
 void MainWindow::on_apioption_triggered()
 {
-    apioption->show();
+    thisapioption->show();
 }
 
 //翻译按钮点击事件
@@ -113,6 +116,6 @@ void MainWindow::on_Len_us_triggered()
 //tran option点击事件
 void MainWindow::on_tran_option_triggered()
 {
-
+    thistranoption->show();
 }
 

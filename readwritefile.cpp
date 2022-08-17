@@ -32,3 +32,16 @@ bool ReadWriteFile::isexist(QString name){
     QFile input = QFile(name);
     return input.exists();
 }
+
+//初始化option
+QStringList ReadWriteFile::InitializeOption(QStringList list){
+    return list
+            << "" //line1 AccessKeyID
+            << "" //line2 AccessKeySecrt
+            << "" //line3 Endpoint
+            << "" //line4 BuckitName
+            << "" //line5 Source language
+            << "" //line6 Target language
+            << "" //line7 Time out
+               ;
+}

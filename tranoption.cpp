@@ -6,6 +6,7 @@ tranoption::tranoption(QWidget *parent) :
     ui(new Ui::tranoption)
 {
     ui->setupUi(this);
+    //加载缓存
 }
 
 tranoption::~tranoption()

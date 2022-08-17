@@ -11,6 +11,7 @@ public:
     static QStringList ReadCach(int line,QString name);
     static void WriteCach(QString text,QString name);
     static bool isexist(QString name);
+    static QStringList InitializeOption(QStringList);//初始化option
 };
 
 #endif // READWRITEFILE_H
