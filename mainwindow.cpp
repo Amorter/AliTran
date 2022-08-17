@@ -14,13 +14,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     ui->setupUi(this);
-    //如果存在apioption,读取到内存
+    //如果存option,读取到内存
     if(ReadWriteFile::isexist("apioption.txt")){
-        apioptionlist = ReadWriteFile::ReadCach(4,"apioption.txt");
+        optionlist = ReadWriteFile::ReadCach(4,"apioption.txt");
     }
     //不存在需要初始化apioptionlist对象，不然会溢出崩溃
     else{
-        apioptionlist << "" << "" << "" << "";
+        optionlist << "" << "" << "" << "" ;
     }
 
     //创建apioption窗口对象
@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    ReadWriteFile::WriteCach(apioptionlist.join("\n"),"apioption.txt");
+    ReadWriteFile::WriteCach(optionlist.join("\n"),"apioption.txt");
 }
 
 //api设置按钮点击事件
@@ -53,7 +53,7 @@ void MainWindow::on_tranButton_clicked()
         ui->outinfo->append("写入本地文件成功");
         //创建Aliapi对象
         ui->outinfo->append("初始化阿里云api接口");
-        Aliapi *aliapi = new Aliapi(apioptionlist);
+        Aliapi *aliapi = new Aliapi(optionlist);
         ui->outinfo->append("成功");
         //上传文件到阿里云OSS
         ui->outinfo->append("上传文件至阿里云OSS");
@@ -108,5 +108,11 @@ void MainWindow::on_Len_us_triggered()
                 //此处填入操作
                 break;
         }
+}
+
+//tran option点击事件
+void MainWindow::on_tran_option_triggered()
+{
+
 }
 

@@ -24,7 +24,6 @@ set(PROJECT_SOURCES
     ${TS_FILES}
     ${UI_FILES}
     app_win32.rc
-    README.md
 )
 
 

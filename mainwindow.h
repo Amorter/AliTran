@@ -24,6 +24,8 @@ private slots:
 
     void on_Len_us_triggered();
 
+    void on_tran_option_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

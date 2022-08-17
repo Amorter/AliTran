@@ -2,6 +2,6 @@
 #define GLOBAL_H
 #include <QString>
 #include <QObject>
-extern QStringList apioptionlist;
+extern QStringList optionlist;
 extern QString outputfileurl;
 #endif // GLOBAL_H

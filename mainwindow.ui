@@ -87,6 +87,7 @@
      <addaction name="Len_us"/>
     </widget>
     <addaction name="apioption"/>
+    <addaction name="tran_option"/>
     <addaction name="language"/>
    </widget>
    <addaction name="menu"/>
@@ -104,6 +105,11 @@
   <action name="Len_us">
    <property name="text">
     <string>en-us</string>
+   </property>
+  </action>
+  <action name="tran_option">
+   <property name="text">
+    <string>tran option</string>
    </property>
   </action>
  </widget>

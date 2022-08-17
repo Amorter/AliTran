@@ -30,7 +30,7 @@
 #include <iostream>
 
 //第三方下载支持
-QString thisgeturl;
+static QString thisgeturl;
 curl::curl(QString geturl)
 {
     thisgeturl = geturl;
