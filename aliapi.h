@@ -11,7 +11,7 @@ public:
     bool pushfile(QString inputfile);
     bool downfile(QString downfile);
     bool delfile(QString delfile);
-    bool tran();
+    bool tran(int timeout);
 };
 
 #endif // ALIAPI_H

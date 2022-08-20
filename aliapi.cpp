@@ -106,7 +106,7 @@ bool Aliapi::delfile(QString delfile){
 }
 
 //翻译任务
-bool Aliapi::tran()
+bool Aliapi::tran(int timeout)
 {
     using namespace AlibabaCloud;
     using namespace AlibabaCloud::Alimt;
@@ -141,8 +141,8 @@ bool Aliapi::tran()
     Model::GetDocTranslateTaskRequest request1;
     request1.setTaskId(outcome.result().getTaskId());
 
-    //等待翻译完成,最多等待50s
-    for( int var=0 ; var<100 ; var++ ){
+    //等待翻译完成,最多等待timeout s,如果timeout==0,无超时
+    for( int var=0 ; var< (timeout==0 ? 0x7fffffff : timeout*2) ; var++ ){
         auto outcome1 = client1.getDocTranslateTask( request1 );
         if( !outcome1.isSuccess() )
         {
@@ -156,7 +156,6 @@ bool Aliapi::tran()
             break;
         }
     }
-
     AlibabaCloud::ShutdownSdk();
     return true;
 }

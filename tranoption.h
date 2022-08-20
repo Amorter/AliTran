@@ -15,6 +15,11 @@ public:
     explicit tranoption(QWidget *parent = nullptr);
     ~tranoption();
 
+private slots:
+    void on_buttonBox_accepted();
+
+    void on_buttonBox_rejected();
+
 private:
     Ui::tranoption *ui;
 };

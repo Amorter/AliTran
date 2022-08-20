@@ -36,12 +36,12 @@ bool ReadWriteFile::isexist(QString name){
 //初始化option
 QStringList ReadWriteFile::InitializeOption(QStringList list){
     return list
-            << "" //line1 AccessKeyID
-            << "" //line2 AccessKeySecrt
-            << "" //line3 Endpoint
-            << "" //line4 BuckitName
-            << "" //line5 Source language
-            << "" //line6 Target language
-            << "" //line7 Time out
+            << "" //at 0 line1 AccessKeyID
+            << "" //at 1 line2 AccessKeySecrt
+            << "" //at 2 line3 Endpoint
+            << "" //at 3 line4 BuckitName
+            << "" //at 4 line5 Source language
+            << "" //at 5 line6 Target language
+            << "" //at 6 line7 Time out
                ;
 }

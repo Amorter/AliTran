@@ -63,8 +63,8 @@ void MainWindow::on_tranButton_clicked()
         if(aliapi->pushfile("input.txt")){
             ui->outinfo->append("上传成功");
             //执行翻译任务
-            ui->outinfo->append("执行翻译任务");
-            aliapi->tran();
+            ui->outinfo->append("执行翻译任务,最大延迟:" + optionlist.at(6) + "s");
+            aliapi->tran(optionlist.at(6).toInt());
             ui->outinfo->append("获取返回结果url成功");
             ui->outinfo->append("尝试下载文件到本地");
             curl outcurl = curl(outputfileurl);
