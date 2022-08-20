@@ -40,8 +40,8 @@ QStringList ReadWriteFile::InitializeOption(QStringList list){
             << "" //at 1 line2 AccessKeySecrt
             << "" //at 2 line3 Endpoint
             << "" //at 3 line4 BuckitName
-            << "" //at 4 line5 Source language
-            << "" //at 5 line6 Target language
-            << "" //at 6 line7 Time out
+            << "en" //at 4 line5 Source language
+            << "zh" //at 5 line6 Target language
+            << "0" //at 6 line7 Time out
                ;
 }

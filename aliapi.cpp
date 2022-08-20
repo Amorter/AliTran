@@ -121,8 +121,8 @@ bool Aliapi::tran(int timeout)
     AlimtClient client( credential, configuration );
 
     Model::CreateDocTranslateTaskRequest request;
-    request.setTargetLanguage("zh");
-    request.setSourceLanguage("en");
+    request.setTargetLanguage(optionlist.at(5).toStdString());
+    request.setSourceLanguage(optionlist.at(4).toStdString());
     request.setFileUrl("https://" + thisoption.at(3).toStdString() + "." + thisoption.at(2).toStdString() + "/cach/input.txt");
     auto outcome = client.createDocTranslateTask( request );
     if ( !outcome.isSuccess() )
